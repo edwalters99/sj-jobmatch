@@ -11,7 +11,7 @@ import JobButtons from '../JobButtons/JobButtons';
 
 function JobCard() {
   return (
-    <div>
+    <div className="jobcard">
         <JobImage />
         <JobTitleCompany />
         <JobDistanceRate />
