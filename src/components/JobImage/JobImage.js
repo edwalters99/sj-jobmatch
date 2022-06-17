@@ -5,7 +5,7 @@ import placeholderimage from './placeholderimage.png'
 function JobImage() {
   return (
     <div>
-        <img className="jobimage" src={placeholderimage} alt="Job Photo" />
+        <img className="jobimage" src={placeholderimage} alt="Job Image" />
     </div>
   )
 }
