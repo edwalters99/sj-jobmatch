@@ -1,5 +1,13 @@
+
+* {
+  margin: 0;
+}
+
+body {
+  font-family: "Ubuntu", sans-serif;
+}
+
 .App {
   margin: 0 auto;
   max-width: 800px;
-
 }
