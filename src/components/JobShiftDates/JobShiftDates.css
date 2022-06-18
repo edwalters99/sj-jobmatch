@@ -25,3 +25,9 @@
     font-family: 'Ubuntu', sans-serif;
     font-weight: 400;
 }
+
+@media (max-width: 510px) {
+    .job-shift-dates-data-container p {
+        margin-bottom: 1em;
+    }
+}
