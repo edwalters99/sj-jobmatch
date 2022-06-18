@@ -1,13 +1,12 @@
-import React from 'react'
-import './JobImage.css'
-import placeholderimage from './placeholderimage.png'
+import React from "react";
+import "./JobImage.css";
 
-function JobImage() {
+function JobImage({ image, jobTitle }) {
   return (
     <div>
-        <img className="jobimage" src={placeholderimage} alt="Job Image" />
+      <img className="jobimage" src={image} alt={jobTitle} />
     </div>
-  )
+  );
 }
 
-export default JobImage
+export default JobImage;
