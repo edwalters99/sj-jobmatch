@@ -12,11 +12,12 @@ import JobButtons from "../JobButtons/JobButtons";
 function JobCard({ jobData }) {
   const image = jobData.jobTitle.imageUrl;
   const jobTitle = jobData.jobTitle.name;
+  const companyName = jobData.company.name;
 
   return (
     <div className="jobcard">
       <JobImage image={image} jobTitle={jobTitle} />
-      <JobTitleCompany />
+      <JobTitleCompany jobTitle={jobTitle} companyName={companyName} />
       <JobDistanceRate />
       <div className="inner-container">
         <JobShiftDates />
