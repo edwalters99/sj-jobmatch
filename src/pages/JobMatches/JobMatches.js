@@ -63,7 +63,7 @@ function JobMatches() {
 
   return (
     <div>
-      <Header />
+      <Header firstName={profileData.firstName} lastName={profileData.lastName} />
       <JobCard />
     </div>
   );
