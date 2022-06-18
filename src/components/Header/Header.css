@@ -1,6 +1,6 @@
 .header {
     background-color: #000;
-    height: 4.5em;
+    height: 3em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -8,19 +8,19 @@
 }
 
 .header-logo {
-  width: 240px;
+  width: 200px;
 }
 
 .header-name {
     color: #fdfdfd;
     font-weight: 300;
-    font-size: 2em;
+    font-size: 1.5rem;
     margin-left: .5em;
     margin-right: .5em;
 }
 
 @media (max-width: 400px) {
     .header-name {
-        font-size: 1.25em; 
+        font-size: 1rem; 
     }
 }
