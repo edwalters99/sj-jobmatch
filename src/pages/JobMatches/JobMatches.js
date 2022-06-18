@@ -6,10 +6,10 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { AiOutlineReload } from "react-icons/ai";
 const axios = require("axios");
 
-const SERVER_URL = "https://test.swipejobs.com/api";
 
-const WORKER_ID = "7f90df6e-b832-44e2-b624-3143d428001f";
-// for test purposes. When operational this would be passed in as a prop.
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const WORKER_ID = process.env.REACT_APP_WORKER_ID;
+// Worker ID for test purposes. If operational this would be passed in as a prop.
 
 function JobMatches() {
   const [loading, setLoading] = useState(true);
@@ -21,16 +21,18 @@ function JobMatches() {
   }, []);
 
   async function getProfile(workerID) {
-    try {
-      const response = await axios.get(
-        SERVER_URL + "/worker/" + workerID + "/profile"
-      );
-      console.log("response ", response);
-      setLoading(false);
-      setProfileData(response.data);
-    } catch (error) {
-      setError(error.message);
-      setLoading(false);
+    if (Object.keys(profileData).length == 0) {
+      try {
+        const response = await axios.get(
+          SERVER_URL + "/worker/" + workerID + "/profile"
+        );
+        console.log("response ", response);
+        setLoading(false);
+        setProfileData(response.data);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
     }
   }
 
@@ -52,6 +54,7 @@ function JobMatches() {
             className="reload-button"
             onClick={() => {
               window.location.reload(false);
+              // If this was part of a larger application useNavigate() could be used here to redirect to another page.
             }}
           >
             <AiOutlineReload size={40} />
