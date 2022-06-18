@@ -13,6 +13,7 @@
 
 .job-location-arrow-container {
     margin-left: auto;
+    transform: translateX(8px);
 }
 
 .location-header {

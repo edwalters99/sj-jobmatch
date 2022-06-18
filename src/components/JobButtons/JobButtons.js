@@ -3,7 +3,10 @@ import './JobButtons.css'
 
 function JobButtons() {
   return (
-    <div>JobButtons</div>
+    <div className="job-buttons-container">
+        <button className="btn">No Thanks</button>
+        <button className="btn btn-reverse">I'll Take it</button>
+    </div>
   )
 }
 
