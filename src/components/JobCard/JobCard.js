@@ -15,11 +15,14 @@ function JobCard() {
         <JobImage />
         <JobTitleCompany />
         <JobDistanceRate />
-        <JobShiftDates />
-        <JobLocation />
-        <JobRequirements />
-        <JobReportTo />
-        <JobButtons />
+        <div className="inner-container">
+            <JobShiftDates />
+            <JobLocation />
+            <JobRequirements />
+            <JobReportTo />
+            <JobButtons />
+        </div>
+       
     </div>
   )
 }
