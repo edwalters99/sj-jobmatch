@@ -6,18 +6,20 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { AiOutlineReload } from "react-icons/ai";
 const axios = require("axios");
 
-
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const WORKER_ID = process.env.REACT_APP_WORKER_ID;
 // Worker ID for test purposes. If operational this would be passed in as a prop.
 
 function JobMatches() {
-  const [loading, setLoading] = useState(true);
+  const [loadingProfile, setLoadingProfile] = useState(true);
+  const [loadingMatches, setLoadingMatches] = useState(true);
   const [profileData, setProfileData] = useState({});
-  const [error, setError] = useState("");
+  const [matchesData, setMatchesData] = useState({});
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     getProfile(WORKER_ID);
+    getMatches(WORKER_ID);
   }, []);
 
   async function getProfile(workerID) {
@@ -26,17 +28,33 @@ function JobMatches() {
         const response = await axios.get(
           SERVER_URL + "/worker/" + workerID + "/profile"
         );
-        console.log("response ", response);
-        setLoading(false);
+        console.log("response profile ", response);
+        setLoadingProfile(false);
         setProfileData(response.data);
       } catch (error) {
-        setError(error.message);
-        setLoading(false);
+        setErrors((prev) => [...prev, error.message + " (Fetching profile)"]);
+        setLoadingProfile(false);
       }
     }
   }
 
-  if (loading) {
+  async function getMatches(workerID) {
+    if (Object.keys(matchesData).length == 0) {
+      try {
+        const response = await axios.get(
+          SERVER_URL + "/worker/" + workerID + "/matches"
+        );
+        console.log("response matches  ", response);
+        setLoadingMatches(false);
+        setMatchesData(response.data);
+      } catch (error) {
+        setErrors((prev) => [...prev, error.message + " (Fetching matches)"]);
+        setLoadingMatches(false);
+      }
+    }
+  }
+
+  if (loadingProfile || loadingMatches) {
     return (
       <div className="loading-spinner">
         <ClipLoader />
@@ -44,17 +62,23 @@ function JobMatches() {
     );
   }
 
-  if (error) {
+  if (errors.length !== 0) {
     return (
       <div className="error-body">
         <div className="error-container">
           <p className="message">Sorry! Something has gone wrong: </p>
-          <p className="error">{error}</p>
+          {errors.map((err, index) => (
+            <p className="error" key={index}>
+              {err}
+            </p>
+          ))}
+          {/*index used as key as errors array will not be re-ordered */}
+
           <div
             className="reload-button"
             onClick={() => {
               window.location.reload(false);
-              // If this was part of a larger application useNavigate() could be used here to redirect to another page.
+              // If this was part of a larger application useNavigate() could be used to redirect to another page.
             }}
           >
             <AiOutlineReload size={40} />
@@ -66,8 +90,15 @@ function JobMatches() {
 
   return (
     <div>
-      <Header firstName={profileData.firstName} lastName={profileData.lastName} />
-      <JobCard />
+      <Header
+        firstName={profileData.firstName}
+        lastName={profileData.lastName}
+      />
+      { matchesData.length === 0 ? 
+      <h2 className="jobmatch-msg">No Job Matches found <br/>Please check again soon!</h2> :
+       matchesData.map(match => <JobCard key={match.jobId} jobData={match}/>)}
+      
+
     </div>
   );
 }
