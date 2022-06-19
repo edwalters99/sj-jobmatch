@@ -1,17 +1,41 @@
-import React from 'react'
-import {BsPersonCircle} from 'react-icons/bs'
-import './JobReportTo.css'
+import React from "react";
+import { BsPersonCircle } from "react-icons/bs";
+import "./JobReportTo.css";
 
-function JobReportTo() {
+function JobReportTo({ reportToName, reportToPhone }) {
+    const renderReportTo = () => {
+    let phoneString;
+    if (reportToName) {
+      reportToName = reportToName.split(" ")[0]; // first name only
+    }
+    if (reportToPhone) {
+      phoneString = `
+            (${reportToPhone.slice(0, 3)}) ${reportToPhone.slice(3,6)} ${reportToPhone.slice(6)}
+        `;
+    } else {
+      phoneString = "";
+    }
+    if (reportToName) {
+      return (
+        <p>
+          {reportToName} {phoneString}
+        </p>
+      );
+    } else {
+      return <p>n/a</p>;
+    }
+  };
   return (
     <div className="job-reportto-container">
-    <div className="job-reportto-icon-container"><BsPersonCircle size={30} /></div>
-    <div className="job-reportto-data-container">
+      <div className="job-reportto-icon-container">
+        <BsPersonCircle size={30} />
+      </div>
+      <div className="job-reportto-data-container">
         <h3>Report To</h3>
-        <p>Dave (123) 546 987</p>
+        {renderReportTo()}
+      </div>
     </div>
-</div>
-  )
+  );
 }
 
-export default JobReportTo
+export default JobReportTo;
