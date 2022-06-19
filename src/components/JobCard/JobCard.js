@@ -27,24 +27,57 @@ function JobCard({ jobData, acceptJob, workerID, captureError }) {
   const reportToPhone = jobData.company.reportTo.phone;
 
   const [loadingAccept, setLoadingAccept] = useState(false);
-  const [acceptResponse, setAcceptResponse] = useState("");
+  const [acceptResponse, setAcceptResponse] = useState({});
+  const [loadingReject, setLoadingReject] = useState(false);
+  const [rejectResponse, setRejectResponse] = useState({});
 
   async function acceptJob(workerID, jobID) {
     if (workerID && jobID && !loadingAccept) {
       try {
         setLoadingAccept(true);
         const response = await axios.get(
-          SERVER_URL + "/workejjjjr/" + workerID + "/job/" + jobID + "/accept"
+          SERVER_URL + "/worker/" + workerID + "/job/" + jobID + "/accept"
         );
         console.log("response accept  ", response);
         setLoadingAccept(false);
         setAcceptResponse(response.data);
+        setRejectResponse({});
       } catch (error) {
         captureError(error, "Accept Job");
         setLoadingAccept(false);
       }
     }
   }
+
+  async function rejectJob(workerID, jobID) {
+    if (workerID && jobID && !loadingReject) {
+      try {
+        setLoadingReject(true);
+        const response = await axios.get(
+          SERVER_URL + "/worker/" + workerID + "/job/" + jobID + "/reject"
+        );
+        console.log("response reject  ", response);
+        setLoadingReject(false);
+        setRejectResponse(response.data);
+        setAcceptResponse({});
+      } catch (error) {
+        captureError(error, "Reject Job");
+        setLoadingReject(false);
+      }
+    }
+  }
+
+  const renderResponseMessage = () => {
+    if (acceptResponse.success) {
+      return <h2 className="lower-message">Job Accepted</h2>;
+    } else if (rejectResponse.success) {
+      return <h2 className="lower-message">Job Rejected</h2>;
+    } else if (acceptResponse.message) {
+      return <h2 className="lower-message">{acceptResponse.message}</h2>;
+    } else if (rejectResponse.message) {
+      return <h2 className="lower-message">{rejectResponse.message}</h2>;
+    }
+  };
 
   return (
     <div className="jobcard">
@@ -59,11 +92,13 @@ function JobCard({ jobData, acceptJob, workerID, captureError }) {
           reportToName={reportToName}
           reportToPhone={reportToPhone}
         />
-        <JobButtons acceptJob={acceptJob} workerID={workerID} jobID={jobID} />
-        {acceptResponse.success && (
-          <h2 className="lower-message">Job Accepted</h2>
-        )}
-        <h2 className="lower-message">{acceptResponse.message}</h2>
+        <JobButtons
+          acceptJob={acceptJob}
+          rejectJob={rejectJob}
+          workerID={workerID}
+          jobID={jobID}
+        />
+        {renderResponseMessage()}
       </div>
     </div>
   );
