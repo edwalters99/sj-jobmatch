@@ -18,6 +18,7 @@ function JobCard({ jobData }) {
   const shifts = jobData.shifts;
   const zoneId = jobData.company.address.zoneId;
   const address = jobData.company.address.formattedAddress;
+  const requirements = jobData.requirements;
 
   return (
     <div className="jobcard">
@@ -27,7 +28,7 @@ function JobCard({ jobData }) {
       <div className="jobcard-inner-container">
         <JobShiftDates shifts={shifts} zoneId={zoneId} />
         <JobLocation address={address} distance={distance} />
-        <JobRequirements />
+        <JobRequirements requirements={requirements}/>
         <JobReportTo />
         <JobButtons />
       </div>
