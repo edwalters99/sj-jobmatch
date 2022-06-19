@@ -17,15 +17,16 @@ function JobCard({ jobData }) {
   const rate = jobData.wagePerHourInCents;
   const shifts = jobData.shifts;
   const zoneId = jobData.company.address.zoneId;
+  const address = jobData.company.address.formattedAddress;
 
   return (
     <div className="jobcard">
       <JobImage image={image} jobTitle={jobTitle} />
       <JobTitleCompany jobTitle={jobTitle} companyName={companyName} />
-      <JobDistanceRate distance={distance} rate={rate}/>
+      <JobDistanceRate distance={distance} rate={rate} />
       <div className="jobcard-inner-container">
-        <JobShiftDates shifts={shifts} zoneId={zoneId}/>
-        <JobLocation />
+        <JobShiftDates shifts={shifts} zoneId={zoneId} />
+        <JobLocation address={address} distance={distance} />
         <JobRequirements />
         <JobReportTo />
         <JobButtons />
