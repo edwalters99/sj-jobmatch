@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./JobCard.css";
 import JobImage from "../JobImage/JobImage";
 import JobTitleCompany from "../JobTitleCompany/JobTitleCompany";
@@ -9,7 +9,11 @@ import JobRequirements from "../JobRequirements/JobRequirements";
 import JobReportTo from "../JobReportTo/JobReportTo";
 import JobButtons from "../JobButtons/JobButtons";
 
-function JobCard({ jobData }) {
+const axios = require("axios");
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+
+function JobCard({ jobData, acceptJob, workerID, captureError }) {
+  const jobID = jobData.jobId;
   const image = jobData.jobTitle.imageUrl;
   const jobTitle = jobData.jobTitle.name;
   const companyName = jobData.company.name;
@@ -21,6 +25,26 @@ function JobCard({ jobData }) {
   const requirements = jobData.requirements;
   const reportToName = jobData.company.reportTo.name;
   const reportToPhone = jobData.company.reportTo.phone;
+
+  const [loadingAccept, setLoadingAccept] = useState(false);
+  const [acceptResponse, setAcceptResponse] = useState("");
+
+  async function acceptJob(workerID, jobID) {
+    if (workerID && jobID && !loadingAccept) {
+      try {
+        setLoadingAccept(true);
+        const response = await axios.get(
+          SERVER_URL + "/workejjjjr/" + workerID + "/job/" + jobID + "/accept"
+        );
+        console.log("response accept  ", response);
+        setLoadingAccept(false);
+        setAcceptResponse(response.data);
+      } catch (error) {
+        captureError(error, "Accept Job");
+        setLoadingAccept(false);
+      }
+    }
+  }
 
   return (
     <div className="jobcard">
@@ -35,7 +59,11 @@ function JobCard({ jobData }) {
           reportToName={reportToName}
           reportToPhone={reportToPhone}
         />
-        <JobButtons />
+        <JobButtons acceptJob={acceptJob} workerID={workerID} jobID={jobID} />
+        {acceptResponse.success && (
+          <h2 className="lower-message">Job Accepted</h2>
+        )}
+        <h2 className="lower-message">{acceptResponse.message}</h2>
       </div>
     </div>
   );

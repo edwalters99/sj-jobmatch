@@ -54,6 +54,11 @@ function JobMatches() {
     }
   }
 
+  // capture Error from API call in JobCard
+  const captureError = (error, source) => {
+    setErrors((prev) => [...prev, error.message + ` (${source})`]);
+  };
+
   if (loadingProfile || loadingMatches) {
     return (
       <div className="loading-spinner">
@@ -94,11 +99,32 @@ function JobMatches() {
         firstName={profileData.firstName}
         lastName={profileData.lastName}
       />
-      { matchesData.length === 0 ? 
-      <h2 className="jobmatch-msg">No Job Matches found <br/>Please check again soon!</h2> :
-       matchesData.map(match => <JobCard key={match.jobId} jobData={match}/>)}
-      
-
+      {matchesData.length === 0 ? (
+        <div>
+          <h2 className="jobmatch-msg">
+            No Job Matches found <br />
+            Please check again soon!
+          </h2>
+          <div
+            className="reload-button"
+            onClick={() => {
+              window.location.reload(false);
+              // If this was part of a larger application useNavigate() could be used to redirect to another page.
+            }}
+          >
+            <AiOutlineReload size={40} />
+          </div>
+        </div>
+      ) : (
+        matchesData.map((match) => (
+          <JobCard
+            key={match.jobId}
+            jobData={match}
+            workerID={WORKER_ID}
+            captureError={captureError}
+          />
+        ))
+      )}
     </div>
   );
 }
