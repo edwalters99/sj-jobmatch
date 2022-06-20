@@ -11,9 +11,13 @@ function JobLocation({ address, distance }) {
       </div>
       <div className="job-location-data-container">
         <h3 className="location-header">Location</h3>
-        <p className="location-address">{address}</p>
-        <p className="location-distance">
-          {distance.toFixed(2)} miles from your job search location
+        <p className="location-address" data-testid="address">
+          {address ? address : "Address Unavailable"}
+        </p>
+        <p className="location-distance" data-testid="distance">
+          {distance
+            ? `${distance.toFixed(2)} miles from your job search location`
+            : "Distance unavailable"}
         </p>
       </div>
       <div className="job-location-arrow-container">
