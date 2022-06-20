@@ -10,7 +10,7 @@ test("Number of requirements rendered matches props", () => {
 
 test("Handles undefined requirements", () => {
   render(<JobRequirements requirements={undefined} />);
-  expect(screen.getByTestId("warning")).toHaveTextContent(/Data unavailable/);
+  expect(screen.getByTestId("warning")).toHaveTextContent("n/a");
 });
 
 test("Handles no requirements", () => {

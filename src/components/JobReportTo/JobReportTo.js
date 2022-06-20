@@ -9,20 +9,18 @@ function JobReportTo({ reportToName, reportToPhone }) {
       reportToName = reportToName.split(" ")[0]; // first name only
     }
     if (reportToPhone) {
-      phoneString = `
-            (${reportToPhone.slice(0, 3)}) ${reportToPhone.slice(3,6)} ${reportToPhone.slice(6)}
-        `;
+      phoneString = `(${reportToPhone.slice(0, 3)}) ${reportToPhone.slice(3,6)} ${reportToPhone.slice(6)}`;
     } else {
       phoneString = "";
     }
     if (reportToName) {
       return (
-        <p>
+        <p data-testid="name-phone">
           {reportToName} {phoneString}
         </p>
       );
     } else {
-      return <p>n/a</p>;
+      return <p data-testid="name-phone">n/a</p>;
     }
   };
   return (
