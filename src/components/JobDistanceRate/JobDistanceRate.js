@@ -2,18 +2,36 @@ import React from "react";
 import "./JobDistanceRate.css";
 
 function JobDistanceRate({ distance, rate }) {
+  if (distance && distance % 1 !== 0) {
+    distance = distance.toFixed(1);
+  }
+
   return (
     <div className="job-distance-rate-container">
       <div className="distance-container">
         <p className="job-distance-rate-header">Distance</p>
-        <p className="job-distance-rate-data">{distance.toFixed(1)} miles</p>
+        {distance ? (
+          <p className="job-distance-rate-data" data-testid="distance">
+            {distance} miles
+          </p>
+        ) : (
+          <p className="job-distance-rate-data" data-testid="distance">
+            Not Available
+          </p>
+        )}
       </div>
       <div className="rate-container">
         <p className="job-distance-rate-header">Hourly Rate</p>
-        <p className="job-distance-rate-data">
-          <span className="super">$</span>
-          {(rate / 100).toFixed(2)}
-        </p>
+        {rate ? (
+          <p className="job-distance-rate-data" data-testid="rate">
+            <span className="super">$</span>
+            {(rate / 100).toFixed(2)}
+          </p>
+        ) : (
+          <p className="job-distance-rate-data" data-testid="rate">
+            tbc
+          </p>
+        )}
       </div>
     </div>
   );
