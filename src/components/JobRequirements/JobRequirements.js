@@ -3,8 +3,12 @@ import { GoTools } from "react-icons/go";
 import "./JobRequirements.css";
 
 function JobRequirements({ requirements }) {
+
   const renderList = () => {
-    if (requirements && requirements.length > 0) {
+    if (!requirements) {
+      return <p data-testid="warning">Data unavailable</p>;
+    }
+    if (requirements.length > 0) {
       return (
         <ul>
           {requirements.map((r, index) => (
@@ -13,7 +17,7 @@ function JobRequirements({ requirements }) {
         </ul>
       );
     } else {
-      return <p>n/a</p>;
+      return <p data-testid="warning">n/a</p>;
     }
   };
 
