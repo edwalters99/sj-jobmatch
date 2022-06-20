@@ -1,8 +1,24 @@
-import {render, screen} from '@testing-library/react';
-import JobImage from './JobImage';
+import { render, screen } from "@testing-library/react";
+import JobImage from "./JobImage";
 
-test('image renders', () => {
-    render(<JobImage />);
-    screen.debug();
-    expect(screen.getByRole("img")).toBeInTheDocument();
-})
+test("Image has image prop as src", () => {
+  render(<JobImage image={"url"} jobTitle="Test Job Title" />);
+  expect(screen.getByRole("img")).toHaveAttribute("src", "url");
+});
+
+test("Image has JobTitle prop as alt text", () => {
+  render(<JobImage image={"url"} jobTitle="Test Job Title" />);
+  expect(screen.getByRole("img")).toHaveAttribute("alt", "Test Job Title");
+});
+
+test("Placeholder Image when image prop is undefined", () => {
+  render(<JobImage image={undefined} jobTitle="Test Job Title" />);
+  expect(screen.getByRole("img")).toHaveAttribute(
+    "src", "placeholderimage.png"
+  );
+});
+
+test("Default alt text when jobTitle prop is undefined", () => {
+  render(<JobImage image={"url"} jobTitle={undefined} />);
+  expect(screen.getByRole("img")).toHaveAttribute("alt", "Example job image");
+});
