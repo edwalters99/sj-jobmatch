@@ -18,39 +18,37 @@ function JobMatches() {
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
+    async function getProfile(workerID) {
+      if (Object.keys(profileData).length === 0) {
+        try {
+          const response = await axios.get(
+            SERVER_URL + "/worker/" + workerID + "/profile"
+          );
+          setLoadingProfile(false);
+          setProfileData(response.data);
+        } catch (error) {
+          setErrors((prev) => [...prev, error.message + " (Fetching profile)"]);
+          setLoadingProfile(false);
+        }
+      }
+    }
+    async function getMatches(workerID) {
+      if (Object.keys(matchesData).length === 0) {
+        try {
+          const response = await axios.get(
+            SERVER_URL + "/worker/" + workerID + "/matches"
+          );
+          setLoadingMatches(false);
+          setMatchesData(response.data);
+        } catch (error) {
+          setErrors((prev) => [...prev, error.message + " (Fetching matches)"]);
+          setLoadingMatches(false);
+        }
+      }
+    }
     getProfile(WORKER_ID);
     getMatches(WORKER_ID);
-  }, []);
-
-  async function getProfile(workerID) {
-    if (Object.keys(profileData).length == 0) {
-      try {
-        const response = await axios.get(
-          SERVER_URL + "/worker/" + workerID + "/profile"
-        );
-        setLoadingProfile(false);
-        setProfileData(response.data);
-      } catch (error) {
-        setErrors((prev) => [...prev, error.message + " (Fetching profile)"]);
-        setLoadingProfile(false);
-      }
-    }
-  }
-
-  async function getMatches(workerID) {
-    if (Object.keys(matchesData).length == 0) {
-      try {
-        const response = await axios.get(
-          SERVER_URL + "/worker/" + workerID + "/matches"
-        );
-        setLoadingMatches(false);
-        setMatchesData(response.data);
-      } catch (error) {
-        setErrors((prev) => [...prev, error.message + " (Fetching matches)"]);
-        setLoadingMatches(false);
-      }
-    }
-  }
+  }, [matchesData, profileData]);
 
   // capture Error from API call in JobCard
   const captureError = (error, source) => {

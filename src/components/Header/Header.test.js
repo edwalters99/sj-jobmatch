@@ -8,7 +8,7 @@ test("Header renders Name when firstName and lastName supplied", () => {
 
 test("Header does not render Name when firstName and lastName are undefined", () => {
   render(<Header firstName={undefined} LastName={undefined} />);
-  expect(screen.getByTestId("heading")).toBeEmptyDOMElement();
+  expect(screen.queryByTestId("heading")).toBeFalsy();
 });
 
 test("Header renders Name when firstName supplied and lastName undefined", () => {
@@ -18,7 +18,7 @@ test("Header renders Name when firstName supplied and lastName undefined", () =>
 
 test("Header does not render Name when firstName is undefined and lastName is supplied", () => {
   render(<Header firstName={undefined} LastName={"Bloggs"} />);
-  expect(screen.getByTestId("heading")).toBeEmptyDOMElement();
+  expect(screen.queryByTestId("heading")).toBeFalsy();
 });
 
 test("logo renders in Header", () => {

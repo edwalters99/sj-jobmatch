@@ -12,7 +12,7 @@ import JobButtons from "../JobButtons/JobButtons";
 const axios = require("axios");
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-function JobCard({ jobData, acceptJob, workerID, captureError }) {
+function JobCard({ jobData, workerID, captureError }) {
   let jobID,
     image,
     jobTitle,
@@ -43,8 +43,6 @@ function JobCard({ jobData, acceptJob, workerID, captureError }) {
       image = jobData.jobTitle.imageUrl;
       jobTitle = jobData.jobTitle.name;
     }
- 
-
   }
 
   const [loadingAccept, setLoadingAccept] = useState(false);

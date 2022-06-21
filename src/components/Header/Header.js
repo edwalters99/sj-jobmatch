@@ -11,7 +11,7 @@ function Header({ firstName, lastName }) {
           {firstName} {lastName}
         </h2>
       ) : (
-        <h2 data-testid="heading"></h2>
+        <></>
       )}
     </div>
   );
