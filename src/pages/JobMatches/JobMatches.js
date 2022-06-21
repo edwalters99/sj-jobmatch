@@ -28,7 +28,6 @@ function JobMatches() {
         const response = await axios.get(
           SERVER_URL + "/worker/" + workerID + "/profile"
         );
-        console.log("response profile ", response);
         setLoadingProfile(false);
         setProfileData(response.data);
       } catch (error) {
@@ -44,7 +43,6 @@ function JobMatches() {
         const response = await axios.get(
           SERVER_URL + "/worker/" + workerID + "/matches"
         );
-        console.log("response matches  ", response);
         setLoadingMatches(false);
         setMatchesData(response.data);
       } catch (error) {

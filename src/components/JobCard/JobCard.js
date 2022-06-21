@@ -13,18 +13,39 @@ const axios = require("axios");
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 function JobCard({ jobData, acceptJob, workerID, captureError }) {
-  const jobID = jobData.jobId;
-  const image = jobData.jobTitle.imageUrl;
-  const jobTitle = jobData.jobTitle.name;
-  const companyName = jobData.company.name;
-  const distance = jobData.milesToTravel;
-  const rate = jobData.wagePerHourInCents;
-  const shifts = jobData.shifts;
-  const zoneId = jobData.company.address.zoneId;
-  const address = jobData.company.address.formattedAddress;
-  const requirements = jobData.requirements;
-  const reportToName = jobData.company.reportTo.name;
-  const reportToPhone = jobData.company.reportTo.phone;
+  let jobID,
+    image,
+    jobTitle,
+    companyName,
+    distance,
+    rate,
+    shifts,
+    zoneId,
+    address,
+    requirements,
+    reportToName,
+    reportToPhone;
+
+  if (jobData) {
+    jobID = jobData.jobId;
+    distance = jobData.milesToTravel;
+    rate = jobData.wagePerHourInCents;
+    shifts = jobData.shifts;
+    requirements = jobData.requirements;
+    if (jobData.company) {
+      companyName = jobData.company.name;
+      zoneId = jobData.company.address.zoneId;
+      address = jobData.company.address.formattedAddress;
+      reportToName = jobData.company.reportTo.name;
+      reportToPhone = jobData.company.reportTo.phone;
+    }
+    if (jobData.jobTitle) {
+      image = jobData.jobTitle.imageUrl;
+      jobTitle = jobData.jobTitle.name;
+    }
+ 
+
+  }
 
   const [loadingAccept, setLoadingAccept] = useState(false);
   const [acceptResponse, setAcceptResponse] = useState({});
@@ -80,7 +101,7 @@ function JobCard({ jobData, acceptJob, workerID, captureError }) {
   };
 
   return (
-    <div className="jobcard">
+    <div className="jobcard" data-testid="jobcard">
       <JobImage image={image} jobTitle={jobTitle} />
       <JobTitleCompany jobTitle={jobTitle} companyName={companyName} />
       <JobDistanceRate distance={distance} rate={rate} />
