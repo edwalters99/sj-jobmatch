@@ -6,9 +6,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This project has been deployed to [https://swipejobs-jobmatches.netlify.app/](https://swipejobs-jobmatches.netlify.app/)
 
+## Additional dependencies
+- axios ^0.27.2
+- luxon ^2.4.0
+- react-icons ^4.4.0
+- react-spinners ^0.12.0
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+To install required dependencies
 
 ### `npm start`
 
