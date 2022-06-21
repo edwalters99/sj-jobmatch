@@ -1,17 +1,17 @@
 .job-title-company-container {
-    background-color: #fff;
-    padding: .5em 1.25em;
+  background-color: #fff;
+  padding: 0.5em 1.25em;
 }
 
 .job-title {
-    font-size: 1.6rem;
-    margin-bottom: .25em;
-    font-weight: 600;
-    letter-spacing: -1px;
+  font-size: 1.6rem;
+  margin-bottom: 0.25em;
+  font-weight: 600;
+  letter-spacing: -1px;
 }
 
 .job-company {
-    font-size: 1.3rem;
-    font-weight: 500;
-    letter-spacing: -.9px;
-};
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: -0.9px;
+}

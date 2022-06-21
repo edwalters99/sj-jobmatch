@@ -39,7 +39,3 @@ test("jobCard renders", () => {
   );
   expect(screen.getByTestId("jobcard")).not.toBeEmptyDOMElement();
 });
-
-
-
-

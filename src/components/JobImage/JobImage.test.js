@@ -14,7 +14,8 @@ test("img with JobTitle prop as alt text", () => {
 test("Placeholder photo when image is undefined", () => {
   render(<JobImage image={undefined} jobTitle="Test Job Title" />);
   expect(screen.getByRole("img")).toHaveAttribute(
-    "src", "placeholderimage.png"
+    "src",
+    "placeholderimage.png"
   );
 });
 

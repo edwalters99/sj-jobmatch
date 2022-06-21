@@ -57,7 +57,6 @@ function JobCard({ jobData, workerID, captureError }) {
         const response = await axios.get(
           SERVER_URL + "/worker/" + workerID + "/job/" + jobID + "/accept"
         );
-        console.log("response accept  ", response);
         setLoadingAccept(false);
         setAcceptResponse(response.data);
         setRejectResponse({});
@@ -75,7 +74,6 @@ function JobCard({ jobData, workerID, captureError }) {
         const response = await axios.get(
           SERVER_URL + "/worker/" + workerID + "/job/" + jobID + "/reject"
         );
-        console.log("response reject  ", response);
         setLoadingReject(false);
         setRejectResponse(response.data);
         setAcceptResponse({});

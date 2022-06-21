@@ -1,12 +1,12 @@
 .jobcard {
-    background-color: #e9e9e9;
-    padding: 1.5em; 
-    margin-bottom: 3em;
+  background-color: #e9e9e9;
+  padding: 1.5em;
+  margin-bottom: 3em;
 }
 
 .jobcard-inner-container {
-    font-family: 'Lato', sans-serif;
-    background-color: #fff;
-    padding-left: 1em;
-    padding-right: 1em;
-};
+  font-family: "Lato", sans-serif;
+  background-color: #fff;
+  padding-left: 1em;
+  padding-right: 1em;
+}

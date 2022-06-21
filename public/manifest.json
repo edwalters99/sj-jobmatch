@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "swipejobs",
+  "name": "swipejobs - Job Matches",
   "icons": [
     {
       "src": "favicon.ico",

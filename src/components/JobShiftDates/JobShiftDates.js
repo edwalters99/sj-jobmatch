@@ -4,8 +4,6 @@ import "./JobShiftDates.css";
 const { DateTime } = require("luxon");
 
 function JobShiftDates({ shifts, zoneId }) {
-
-  
   const renderShifts = (shifts, zoneId) => {
     return shifts.map((shift, index) => {
       const startISO = shift.startDate;
@@ -26,8 +24,18 @@ function JobShiftDates({ shifts, zoneId }) {
       </div>
       <div className="job-shift-dates-data-container">
         <h3>Shift Dates</h3>
-        {shifts && shifts.length === 0 && <ul><li>No shifts available</li></ul>}
-        {!shifts || !zoneId ? <ul><li>Shift data unavailable</li></ul> : <ul>{renderShifts(shifts, zoneId)}</ul>}
+        {shifts && shifts.length === 0 && (
+          <ul>
+            <li>No shifts available</li>
+          </ul>
+        )}
+        {!shifts || !zoneId ? (
+          <ul>
+            <li>Shift data unavailable</li>
+          </ul>
+        ) : (
+          <ul>{renderShifts(shifts, zoneId)}</ul>
+        )}
       </div>
     </div>
   );

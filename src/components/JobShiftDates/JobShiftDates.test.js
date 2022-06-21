@@ -65,8 +65,6 @@ test("Handles undefined zone ID", () => {
 });
 
 test("Handles no shifts", () => {
-    render(<JobShiftDates shifts={[]} zoneId="America/Chicago" />);
-    expect(screen.getByRole("listitem")).toHaveTextContent(
-      /No shifts available/
-    );
-  });
+  render(<JobShiftDates shifts={[]} zoneId="America/Chicago" />);
+  expect(screen.getByRole("listitem")).toHaveTextContent(/No shifts available/);
+});

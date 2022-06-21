@@ -11,8 +11,8 @@ function JobDistanceRate({ distance, rate }) {
       <div className="distance-container">
         <p className="job-distance-rate-header">Distance</p>
         <p className="job-distance-rate-data" data-testid="distance">
-            {distance ? distance + ' miles' : 'Not Available' } 
-          </p>
+          {distance ? distance + " miles" : "Not Available"}
+        </p>
       </div>
       <div className="rate-container">
         <p className="job-distance-rate-header">Hourly Rate</p>

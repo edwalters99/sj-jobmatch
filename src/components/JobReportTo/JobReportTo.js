@@ -3,7 +3,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import "./JobReportTo.css";
 
 function JobReportTo({ reportToName, reportToPhone }) {
-    const renderReportTo = () => {
+  const renderReportTo = () => {
     let phoneString;
     if (reportToName) {
       reportToName = reportToName.split(" ")[0]; // first name only

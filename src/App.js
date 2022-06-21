@@ -1,10 +1,10 @@
-import JobMatches from './pages/JobMatches/JobMatches';
-import './App.css';
+import JobMatches from "./pages/JobMatches/JobMatches";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-       <JobMatches />
+      <JobMatches />
     </div>
   );
 }
