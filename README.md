@@ -72,23 +72,23 @@ I made the following assumptions:
 
 - Direct access to images / logos / style guide / figma design are unavailable. I emulated the design to the best of my ability from the supplied image.
 
-- The requested page will be used on tablet or phone devices. I ensured that the card has a max-width so it looks acceptable on large screens, but I didn't create a full desktop design. This would involve creating a page design from scratch, likely involving multiple cards in a grid pattern on the page. (CSS Grid or Flexbox)
+- The page will be viewed primarily on tablet or phone devices. I ensured that the card has a max-width so it looks acceptable on large screens, but I didn't create a full desktop design. This would involve creating a page design from scratch, likely involving multiple cards in a grid pattern on the page. (CSS Grid or Flexbox)
 
 - I chose to display the confirmation/denial message when a job is accepted/rejected directly underneath the buttons as I felt that this was the cleanest and simplest visibility for the user.
 
-- No authentication is required for the API GET requests (and not currently anticipated). This could be implemented in the future by building this functionality into the axios functions.
+- Authentication is not required for the API GET requests and not currently anticipated. If this changed in the future it would need to be built into the axios get request functions.
 
-- There is an attribute in the API ‘profile' response named maxJobDistance. Since the two example jobs returned by 'matches' are within this distance, I assume that filtering is handled by the back-end and additional filtering/checks are not required in React.
+- There is an attribute in the ‘profile' JSON named `maxJobDistance`. Since the two example jobs returned by 'matches' are within this distance, I assume that filtering is handled by the back-end and additional filtering/checks are not required in React.
 
-- The JSON data is not consistent between the two example job Matches. (e.g. There is no phone number provided for the Report To contact in one example and there are no Requirements in the other example). I therefore assumed that other data may be inconsistent in the future and guarded for / built test cases to handle undefined / empty string data gracefully.
+- The JSON data is inconsistent between the two example job Matches. (i.e. There is no phone number available for Report To in one example and there are no Requirements in the other example). I assumed that other data may be inconsistent and guarded for / built test cases to handle missing data gracefully.
 
 ---------------------------------------------------------------
 
 ### Improvements
 
-- API Calls are made from functions in JobMatches and JobCard. I would have preferred to separate them out to a 'services' folder for modularity / re-use. But I relied on these functions modifying local state (errors and loading status) through side effects. Without implementing global state (my previous React project used Redux) I wasn't sure how to move these functions out of the components. This also caused me problems in finding a way to test the API calls using Jest. This is something that I need to study further.
+- API Calls are made from functions in JobMatches and JobCard. I would have preferred to separate them out to a 'services' folder for modularity / re-use. But I relied on these functions modifying local state (errors and loading status). Without implementing global state (my previous React project used Redux) I was unsure how to move these functions out of the components. This also caused me problems in finding a way to test the API calls using Jest. This is something that I need to study and investigate further.
 
-- To implement global CSS variables that inherit into the individual components, for example in case the background colour of the card needed to be changed. Currently CSS would need to be changed across a few components.
+- To implement global CSS variables that inherit into the individual components, for example in case the background colour of the card needed to be changed. Currently CSS properties would need to be changed across a few components which isn't ideal.
 
 ---------------------------------------------------------------
 
