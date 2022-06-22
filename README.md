@@ -12,6 +12,8 @@ This project has been deployed to [https://swipejobs-jobmatches.netlify.app/](ht
 - react-icons ^4.4.0
 - react-spinners ^0.12.0
 
+---------------------------------------------------------------
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -53,3 +55,42 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+---------------------------------------------------------------
+
+### Approach
+
+I chose to create separate components for each section of the JobCard. I thought that this would be beneficial for testing as I could create a test suite for each section that displays data within the card. In the future if the card were to be redesigned, this modular approach would ensure that these components could be re-used  / re-assembled in a different order etc. The relevant CSS and jest tests are contained in each folder. The downside was that there were more files & folders to work with so the project may appear more complex at first sight. 
+
+I started by designing the file structure. I then created the JobCard subcomponents and CSS with hard coded data to ensure that the style matched the design. I then implemented the API calls, passed the data to the components, processed it for formatting and tested that it matched the design.
+I then wrote test suites for the components. This was useful as it prompted me to consider edge cases that might cause a component to fail if it received undefined data for example.
+
+---------------------------------------------------------------
+
+### Assumptions
+
+I made the following assumptions:
+
+- Direct access to images / logos / style guide / figma design are unavailable. I emulated the design to the best of my ability from the supplied image.
+
+- The requested page will be used on tablet or phone devices. I ensured that the card has a max-width so it looks acceptable on large screens, but I didn't create a full desktop design. This would involve creating a page design from scratch, likely involving multiple cards in a grid pattern on the page. (CSS Grid or Flexbox)
+
+- I chose to display the confirmation/denial message when a job is accepted/rejected directly underneath the buttons as I felt that this was the cleanest and simplest visibility for the user.
+
+- No authentication is required for the API GET requests (and not currently anticipated). This could be implemented in the future by building this functionality into the axios functions.
+
+- There is an attribute in the API ‘profile' response named maxJobDistance. Since the two example jobs returned by 'matches' are within this distance, I assume that filtering is handled by the back-end and additional filtering/checks are not required in React.
+
+- The JSON data is not consistent between the two example job Matches. (e.g. There is no phone number provided for the Report To contact in one example and there are no Requirements in the other example). I therefore assumed that other data may be inconsistent in the future and guarded for / built test cases to handle undefined / empty string data gracefully.
+
+---------------------------------------------------------------
+
+### Improvements
+
+- API Calls are made from functions in JobMatches and JobCard. I would have preferred to separate them out to a 'services' folder for modularity / re-use. But I relied on these functions modifying local state (errors and loading status) through side effects. Without implementing global state (my previous React project used Redux) I wasn't sure how to move these functions out of the components. This also caused me problems in finding a way to test the API calls using Jest. This is something that I need to study further.
+
+- To implement global CSS variables that inherit into the individual components, for example in case the background colour of the card needed to be changed. Currently CSS would need to be changed across a few components.
+
+---------------------------------------------------------------
+
+### Screenshot
+<img src="/public/images/screenshot.jpg" width="250" alt="Screenshot">
