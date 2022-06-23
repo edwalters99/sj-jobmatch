@@ -57,16 +57,16 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ---------------------------------------------------------------
 
-### Approach
+## Approach
 
-I chose to create separate components for each section of the JobCard. I thought that this would be beneficial for testing as I could create a test suite for each section that displays data within the card. In the future if the card were to be redesigned, this modular approach would ensure that these components could be re-used  / re-assembled in a different order etc. The relevant CSS and jest tests are contained in each folder. The downside was that there were more files & folders to work with so the project may appear more complex at first sight. 
+I chose to create separate components for each section of the JobCard. I thought that this would be beneficial for testing as I could create a test suite for each section that displays data within the card. If the card were to be redesigned, this modular approach would ensure that these components could be re-used  / re-assembled in a different order etc. The relevant CSS and jest tests are compartmentalized in each folder. The downside was that there are more files & folders to work with so the project may appear more complex at first sight. 
 
-I started by designing the file structure. I then created the JobCard subcomponents and CSS with hard coded data to ensure that the style matched the design. I then implemented the API calls, passed the data to the components, processed it for formatting and tested that it matched the design.
+I started by designing the file structure. I then created the JobCard subcomponents and CSS, using hard coded data to ensure that the style matched the design. I then implemented the API call functionality, passed the data to the components, processed it for formatting and tested that it still matched the design.
 I then wrote test suites for the components. This was useful as it prompted me to consider edge cases that might cause a component to fail if it received undefined data for example.
 
 ---------------------------------------------------------------
 
-### Assumptions
+## Assumptions
 
 I made the following assumptions:
 
@@ -76,21 +76,21 @@ I made the following assumptions:
 
 - I chose to display the confirmation/denial message when a job is accepted/rejected directly underneath the buttons as I felt that this was the cleanest and simplest visibility for the user.
 
-- Authentication is not required for the API GET requests and not currently anticipated. If this changed in the future it would need to be built into the axios get request functions.
+- Authentication is not required for the API GET requests (and not currently planned). If authentication were to be implemented changes would need to be made to the axios functions.
 
 - There is an attribute in the ‘profile' JSON named `maxJobDistance`. Since the two example jobs returned by 'matches' are within this distance, I assume that filtering is handled by the back-end and additional filtering/checks are not required in React.
 
-- The JSON data is inconsistent between the two example job Matches. (i.e. There is no phone number available for Report To in one example and there are no Requirements in the other example). I assumed that other data may be inconsistent and guarded for / built test cases to handle missing data gracefully.
+- JSON data is inconsistent between the two example job Matches. (i.e. There is no phone number available for Report To in one example, and in the other example there are no Requirements supplied). I assumed that other data may be inconsistent. I guarded for & built test cases to handle missing/empty data gracefully.
 
 ---------------------------------------------------------------
 
-### Improvements
+## Improvements
 
-- API Calls are made from functions in JobMatches and JobCard. I would have preferred to separate them out to a 'services' folder for modularity / re-use. But I relied on these functions modifying local state (errors and loading status). Without implementing global state (my previous React project used Redux) I was unsure how to move these functions out of the components. This also caused me problems in finding a way to test the API calls using Jest. This is something that I need to study and investigate further.
+- API Calls are made from functions within JobMatches and JobCard. I would have preferred to separate them out to a 'services' folder for modularity / re-use. But I relied on these functions modifying local state (errors and loading status). Without implementing global state (my previous React project used Redux) I was unsure how to move these functions out of the components. This also caused me a problem in finding a way to test the API calls using jest. This is something that I need to study and investigate further.
 
-- To implement global CSS variables that inherit into the individual components, for example in case the background colour of the card needed to be changed. Currently CSS properties would need to be changed across a few components which isn't ideal.
+- To implement global CSS variables that inherit into the individual components. Currently to make a change such as the background colour to the card, CSS properties would need to be amended across a few components. This isn't ideal. 
 
 ---------------------------------------------------------------
 
-### Screenshot
+## Screenshot
 <img src="/public/images/screenshot.jpg" width="250" alt="Screenshot">
