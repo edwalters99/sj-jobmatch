@@ -95,7 +95,7 @@ function JobMatches() {
         firstName={profileData.firstName}
         lastName={profileData.lastName}
       />
-      {matchesData.length === 0 ? (
+      {(Object.keys(matchesData).length === 0) ? (
         <div>
           <h2 className="jobmatch-msg">
             No Job Matches found <br />
