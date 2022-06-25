@@ -109,12 +109,12 @@ function JobCard({ jobData, workerID, captureError }) {
           reportToName={reportToName}
           reportToPhone={reportToPhone}
         />
-        <JobButtons
+        {shifts.length > 0 && <JobButtons
           acceptJob={acceptJob}
           rejectJob={rejectJob}
           workerID={workerID}
           jobID={jobID}
-        />
+        />}
         {renderResponseMessage()}
       </div>
     </div>
