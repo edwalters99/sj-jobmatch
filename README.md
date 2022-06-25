@@ -92,8 +92,8 @@ I made the following assumptions:
 
 ---------------------------------------------------------------
 
-## Screenshot
+## Screenshots
 <img src="/public/images/screenshot.jpg" width="250" alt="Screenshot">
-<img src="/public/images/screenshot_nomatches.jpg" width="250" alt="Screenshot - No Job Matches">
 <img src="/public/images/screenshot_noshifts.jpg" width="250" alt="Screenshot - No Shifts">
+<img src="/public/images/screenshot_nomatches.jpg" width="250" alt="Screenshot - No Job Matches">
 <img src="/public/images/screenshot_errors.jpg" width="250" alt="Screenshot - Errors">
