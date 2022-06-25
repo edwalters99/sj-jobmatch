@@ -90,6 +90,8 @@ I made the following assumptions:
 
 - To implement global CSS variables that inherit into the individual components. Currently to make a change such as the background colour to the card, CSS properties would need to be amended across a few components. This isn't ideal. 
 
+- Errors could be handled using Error Boundaries. This would capture errors anywhere in the child component tree, log those errors, and display a fallback UI. My current approach was to use JobMatches local state and conditional rendering.
+
 ---------------------------------------------------------------
 
 ## Screenshots
